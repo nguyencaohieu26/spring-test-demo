@@ -1,8 +1,6 @@
 name: CI Workflows
 
-on:
-  push:
-
+on: push
   workflow_call:
 
 jobs:
