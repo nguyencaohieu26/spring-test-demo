@@ -1,6 +1,9 @@
 name: CI Workflows
 
-on: push
+on:
+  push:
+    branches-ignore:
+      - 'test'
   workflow_call:
 
 jobs:
