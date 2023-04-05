@@ -3,7 +3,7 @@ name: CI Workflows
 on:
   push:
     branches-ignore:
-      - 'test'
+      - 'develop'
   workflow_call:
 
 jobs:
