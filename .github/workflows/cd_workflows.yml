@@ -20,8 +20,8 @@ jobs:
     timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
-      DOCKER_REPOSITORY: cd-test
-      IMAGE_NAME: j-spring-demo
+      DOCKER_REPOSITORY: nguyencaohieu26
+      IMAGE_NAME: cd-test
       IMAGE_TAG: ${{ github.run_number }}
 
     steps:
