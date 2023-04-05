@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Docker Image
         run:
-          docker build . --file ./Dockerfile  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER --no-cache
+          docker build . --file ./Dockerfile  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:latest --no-cache
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -64,4 +64,4 @@ jobs:
 
       - name: Push Image to Docker Hub
         run:
-          docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER
+          docker push $DOCKER_REPOSITORY/$IMAGE_NAME:latest
