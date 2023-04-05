@@ -1,0 +1,63 @@
+name: CD Workflows
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+permissions: write-all
+
+jobs:
+####  CI process ####
+  ci-process:
+    uses: ./.github/workflows/ci.yml
+#### CD process ####
+  cd-process:
+    needs:
+      - ci-process
+    if:
+      contains('refs/heads/deployment/develop', github.ref)
+      timeout-minutes: 30
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_REPOSITORY: cd-test
+      IMAGE_NAME: j-spring-demo
+      IMAGE_TAG: ${{ github.run_number }}
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@3
+
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto' # See 'Supported distributions' for available options
+          java-version: '17'
+
+      - name: Setup Maven
+        uses: stCarolas/setup-maven@v4.5
+        with:
+          maven-version: 3.8.2
+
+      - name: Build Docker Image
+        run:
+          docker build . --file ./Dockerfile  --tag  $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER --build-arg environment=--spring.profiles.active=deploy --no-cache
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        continue-on-error: true
+        with:
+          image-ref: 'docker.io/${{ env.DOCKER_REPOSITORY }}/${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}'
+          format: 'table'
+          exit-code: '1'
+          ignore-unfixed: true
+          vuln-type: 'os,library'
+          severity: 'MEDIUM,HIGH,CRITICAL'
+
+      - name: Login to Docker Hub
+          run: |
+            echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u $DOCKER_REPOSITORY --password-stdin
+
+      - name: Push Image to Docker Hub
+          run:
+            docker push $DOCKER_REPOSITORY/$IMAGE_NAME:$GITHUB_RUN_NUMBER
