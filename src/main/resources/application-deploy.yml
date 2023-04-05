@@ -6,7 +6,7 @@ spring:
       database: spring-mongo-db
       password: '123456123'
       port: '27017'
-      host: app_db
+      host: 127.0.0.1
       auto-index-creation: true
   application:
     name: Spring Demo Validation In Deployment Environment
