@@ -17,7 +17,7 @@ jobs:
       - ci-process
     if:
       contains('refs/heads/deployment/develop', github.ref)
-      timeout-minutes: 30
+    timeout-minutes: 30
     runs-on: ubuntu-latest
     env:
       DOCKER_REPOSITORY: cd-test
