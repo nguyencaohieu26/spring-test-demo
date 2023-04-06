@@ -29,12 +29,12 @@ jobs:
       - name: Checkout source
         uses: actions/checkout@v3
 
-#      - name: Setup Java
-#        uses: actions/setup-java@v3
-#        with:
-#          distribution: 'corretto' # See 'Supported distributions' for available options
-#          java-version: '17'
-#          cache: maven
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'corretto' # See 'Supported distributions' for available options
+          java-version: '17'
+          cache: maven
 
 #      - name: Build file jar
 #        run:  mvn -B package --file pom.xml
