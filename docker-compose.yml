@@ -7,6 +7,8 @@ services:
     restart: always
     ports:
       - "9100:9100"
+    networks:
+        - database-network
     links:
       - mongodb:app_db
 #  Install mongo
@@ -25,7 +27,7 @@ volumes:
   data: {}
 
 networks:
-  default:
-    name: application-network
+    database-network:
+        external: true
 
 
