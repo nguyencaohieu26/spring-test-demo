@@ -1,10 +1,11 @@
-#FROM openjdk:17-alpine AS builder
-#VOLUME /tmp
-#####
+FROM openjdk:17-alpine
+####
 FROM maven:3.8-amazoncorretto-17 As builder2
 
 WORKDIR /app
 COPY . .
+
+VOLUME /tmp
 
 RUN mvn install
 
