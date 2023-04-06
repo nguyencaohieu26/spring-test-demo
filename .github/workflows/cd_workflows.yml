@@ -44,8 +44,10 @@ jobs:
         run: mvn install
 
       - name: Build Docker Image
-        run:
-          docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:latest --tag $DOCKER_REPOSITORY/$IMAGE_NAME:@v$IMAGE_TAG --no-cache .
+        run: |
+          docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:@v$IMAGE_TAG --no-cache .
+          docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:latest --no-cache .
+
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
@@ -63,5 +65,7 @@ jobs:
           echo "${{ secrets.DOCKER_REPOSITORY_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_REPOSITORY_USERNAME }} --password-stdin
 
       - name: Push Image to Docker Hub
-        run:
+        run: |
+          docker push $DOCKER_REPOSITORY/$IMAGE_NAME:@v$IMAGE_TAG
           docker push $DOCKER_REPOSITORY/$IMAGE_NAME:latest
+
