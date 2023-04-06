@@ -36,8 +36,8 @@ jobs:
           java-version: '17'
           cache: maven
 
-#      - name: Build file jar
-#        run:  mvn -B package --file pom.xml
+      - name: Build file jar
+        run:  mvn install
 
       - name: Build Docker Image
         run: |

@@ -1,13 +1,9 @@
-FROM openjdk:17-alpine
-####
-FROM maven:3.6-openjdk-17-slim As builder
+FROM openjdk:17-alpine as builder
 
 WORKDIR /app
 COPY . .
 
 VOLUME /tmp
-
-RUN mvn install
 
 ENV PORT=9100
 EXPOSE $PORT
