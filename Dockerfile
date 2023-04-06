@@ -9,7 +9,9 @@ ENV PORT=9100
 EXPOSE $PORT
 
 RUN ls -a
+
 FROM maven:3.6.0-jdk-13-alpine
+RUN pwd
 RUN mvn -f /app/pom.xml -B package
 
 
