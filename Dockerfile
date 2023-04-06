@@ -8,7 +8,8 @@ VOLUME /tmp
 ENV PORT=9100
 
 EXPOSE $PORT
-
+#
+FROM maven:3.6.0-jdk-11-slim AS build
 RUN mvn install
 
 FROM datanese/gcr.io-distroless-java:latest
