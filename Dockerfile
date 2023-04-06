@@ -4,7 +4,7 @@ VOLUME /tmp
 ENV PORT=9100
 EXPOSE $PORT
 
-FROM maven:3.6.0-jdk-13-alpine
+FROM maven:3.8-amazoncorretto-17
 WORKDIR /app
 COPY . .
 RUN ls
