@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:vIMAGE_TAG --no-cache .
+          docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:v$IMAGE_TAG --no-cache .
           docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:latest --no-cache .
 
 
