@@ -17,4 +17,4 @@ ADD ${JAR_FILE} app.jar
 
 USER hieunguyen
 
-ENTRYPOINT ["java", "-jar","/app.jar","--spring.profiles.active=deploy"]
+ENTRYPOINT ["java", "-jar","/app.jar","--network=database-network","--spring.profiles.active=deploy"]
