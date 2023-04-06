@@ -10,7 +10,7 @@ EXPOSE $PORT
 
 RUN ls -a
 FROM maven:3.6.0-jdk-13-alpine
-RUN mvn -f ./pom.xml clean package
+RUN mvn -f pom.xml clean package
 
 
 FROM datanese/gcr.io-distroless-java:latest
