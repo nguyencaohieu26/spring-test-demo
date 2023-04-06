@@ -45,7 +45,7 @@ jobs:
 
       - name: Build Docker Image
         run:
-          docker build  -t $DOCKER_REPOSITORY/$IMAGE_NAME:latest -t $DOCKER_REPOSITORY/$IMAGE_NAME:@v$IMAGE_TAG --no-cache .
+          docker build  --tag $DOCKER_REPOSITORY/$IMAGE_NAME:latest --tag $DOCKER_REPOSITORY/$IMAGE_NAME:@v$IMAGE_TAG --no-cache .
 
       - name: Run Trivy vulnerability scanner
         uses: aquasecurity/trivy-action@master
