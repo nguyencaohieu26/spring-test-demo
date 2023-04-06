@@ -3,7 +3,7 @@ FROM openjdk:17-alpine AS Base
 WORKDIR /app
 COPY . .
 RUN pwd
-RUN ll
+RUN ls
 
 VOLUME /tmp
 
