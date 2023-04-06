@@ -5,10 +5,8 @@ COPY . .
 
 VOLUME /tmp
 
-EXPOSE 9100
+ENV PORT=9100
 
-#ARG JAR_FILE=target/sping-validation-demo-0.0.5-SNAPSHOT.jar
+EXPOSE $PORT
 
-RUN ls
-
-ENTRYPOINT ["java", "-jar","target/sping-validation-demo-0.0.5-SNAPSHOT.jar","--network=database-network","--spring.profiles.active=deploy"]
+CMD "java", "-jar","target/sping-validation-demo-0.0.5-SNAPSHOT.jar","--spring.profiles.active=deploy"
