@@ -9,6 +9,6 @@ EXPOSE 9100
 
 ARG JAR_FILE=target/sping-validation-demo-0.0.5-SNAPSHOT.jar
 
-RUN cd /target
+RUN ls
 
 ENTRYPOINT ["java", "-jar","sping-validation-demo-0.0.5-SNAPSHOT.jar","--network=database-network","--spring.profiles.active=deploy"]
